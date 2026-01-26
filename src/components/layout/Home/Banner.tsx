@@ -1,5 +1,7 @@
-import { get_apod } from "../../hooks/useNasaApi"
-import { Button } from "../ui/button"
+import { get_apod } from "../../../hooks/useNasaApi"
+import { Button } from "../../ui/button"
+
+import { Link } from "react-router-dom"
 
 const Banner = () => {
     const { apod } = get_apod()
@@ -23,9 +25,11 @@ const Banner = () => {
                 <h2 className="text-2xl font-bold leading-tight">
                     {(apod as any)?.title}
                 </h2>
-                <Button className="w-sm hover:cursor-pointer">
-                    Learn More
-                </Button>
+                <Link to="/apod">
+                    <Button className="w-sm hover:cursor-pointer">
+                            Learn More
+                    </Button>
+                </Link>
             </div>
         </div>
     )

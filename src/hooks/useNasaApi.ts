@@ -56,4 +56,27 @@ const get_neo = () => {
     return { loading, neo, fetchNeo }
 }
 
-export { get_apod, get_neo }
+const get_specific_apod = () => {
+    const [loading, setLoading] = useState(false)
+    const [apod, setApod] = useState<any>(null)
+
+    const get_apod = async (targetDate: string) => {
+        setLoading(true)
+        try {
+            const response = await fetch(
+                `https://api.nasa.gov/planetary/apod?api_key=${import.meta.env.VITE_NASA_API_KEY}&date=${targetDate}`
+            )
+            const data = await response.json()
+            setApod(data)
+        } catch (err) {
+            console.error(err)
+        } finally {
+            setLoading(false)
+        }
+    }
+
+    return { loading, apod, get_apod }
+}
+
+
+export { get_apod, get_neo, get_specific_apod }

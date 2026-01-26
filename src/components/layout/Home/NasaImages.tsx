@@ -12,7 +12,6 @@ const NasaImages = () => {
             description: "Discover stunning images from Mars rovers including Perseverance, Curiosity, and historic missions to the Red Planet.",
             query: "mars+rover+perseverance",
             icon: "rocket",
-            imageCount: "500+",
             color: "text-red-500"
         },
         {
@@ -21,7 +20,6 @@ const NasaImages = () => {
             description: "Explore breathtaking cosmic landscapes captured by Hubble and James Webb Space Telescopes showcasing the beauty of our universe.",
             query: "nebula+galaxy+hubble",
             icon: "sparkles",
-            imageCount: "1000+",
             color: "text-purple-500"
         },
         {
@@ -30,7 +28,6 @@ const NasaImages = () => {
             description: "View iconic spacecraft, rockets, and historic space missions from Apollo to modern day exploration vehicles.",
             query: "spacecraft+rocket+mission",
             icon: "telescope",
-            imageCount: "750+",
             color: "text-blue-500"
         }
     ];
@@ -70,9 +67,6 @@ const NasaImages = () => {
                                     </div>
                                     <CardTitle className="text-xl">{category.title}</CardTitle>
                                 </div>
-                                <Badge variant="secondary" className="shrink-0">
-                                    {category.imageCount}
-                                </Badge>
                             </div>
                         </CardHeader>
         

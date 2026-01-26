@@ -1,15 +1,15 @@
 import {
     NavigationMenu,
     NavigationMenuContent,
-    NavigationMenuIndicator,
     NavigationMenuItem,
     NavigationMenuLink,
     NavigationMenuList,
     NavigationMenuTrigger,
-    NavigationMenuViewport,
 } from "@/components/ui/navigation-menu"
 
 import { Rocket } from "lucide-react"
+
+import { Link } from "react-router-dom"
 
 const NavBar = () => {
     return (
@@ -26,7 +26,9 @@ const NavBar = () => {
                     <NavigationMenuList>
                         <NavigationMenuItem>
                             <NavigationMenuLink asChild>
-                                <h1>Home</h1>
+                                <Link to="/">
+                                    Home
+                                </Link>
                             </NavigationMenuLink>
                         </NavigationMenuItem>
                     </NavigationMenuList>
@@ -35,7 +37,9 @@ const NavBar = () => {
                     <NavigationMenuList>
                         <NavigationMenuItem>
                             <NavigationMenuLink asChild>
-                                <h1>About</h1>
+                                <Link to="/about">
+                                    About
+                                </Link>
                             </NavigationMenuLink>
                         </NavigationMenuItem>
                     </NavigationMenuList>
@@ -44,7 +48,9 @@ const NavBar = () => {
                     <NavigationMenuList>
                         <NavigationMenuItem>
                             <NavigationMenuLink asChild>
-                                <h1>Picture of the Day</h1>
+                                <Link to="/apod">
+                                    Picture of the Day
+                                </Link>
                             </NavigationMenuLink>
                         </NavigationMenuItem>
                     </NavigationMenuList>
