@@ -1,10 +1,8 @@
 import {
     NavigationMenu,
-    NavigationMenuContent,
     NavigationMenuItem,
     NavigationMenuLink,
     NavigationMenuList,
-    NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu"
 
 import { Rocket } from "lucide-react"
@@ -31,10 +29,6 @@ const NavBar = () => {
                                 </Link>
                             </NavigationMenuLink>
                         </NavigationMenuItem>
-                    </NavigationMenuList>
-                </NavigationMenu>
-                <NavigationMenu>
-                    <NavigationMenuList>
                         <NavigationMenuItem>
                             <NavigationMenuLink asChild>
                                 <Link to="/about">
@@ -42,10 +36,6 @@ const NavBar = () => {
                                 </Link>
                             </NavigationMenuLink>
                         </NavigationMenuItem>
-                    </NavigationMenuList>
-                </NavigationMenu>
-                <NavigationMenu>
-                    <NavigationMenuList>
                         <NavigationMenuItem>
                             <NavigationMenuLink asChild>
                                 <Link to="/apod">
@@ -53,34 +43,11 @@ const NavBar = () => {
                                 </Link>
                             </NavigationMenuLink>
                         </NavigationMenuItem>
-                    </NavigationMenuList>
-                </NavigationMenu>
-                <NavigationMenu>
-                    <NavigationMenuList>
-                        <NavigationMenuItem>
-                            <NavigationMenuTrigger>Mars Rovers</NavigationMenuTrigger>
-                            <NavigationMenuContent>
-                                <NavigationMenuLink>Link</NavigationMenuLink>
-                                <NavigationMenuLink>Link</NavigationMenuLink>
-                                <NavigationMenuLink>Link</NavigationMenuLink>
-                            </NavigationMenuContent>
-                        </NavigationMenuItem>
-                    </NavigationMenuList>
-                </NavigationMenu>
-                <NavigationMenu>
-                    <NavigationMenuList>
                         <NavigationMenuItem>
                             <NavigationMenuLink asChild>
-                                <h1>Asteroids</h1>
-                            </NavigationMenuLink>
-                        </NavigationMenuItem>
-                    </NavigationMenuList>
-                </NavigationMenu>
-                <NavigationMenu>
-                    <NavigationMenuList>
-                        <NavigationMenuItem>
-                            <NavigationMenuLink asChild>
-                                <h1>Gallery</h1>
+                                <Link to="/launch">
+                                    Rocket Launch
+                                </Link>
                             </NavigationMenuLink>
                         </NavigationMenuItem>
                     </NavigationMenuList>

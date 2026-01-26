@@ -4,6 +4,7 @@ import About from "./components/layout/About"
 import Footer from "./components/layout/Footer"
 
 import APOD from "./components/layout/APOD"
+import LaunchData from "./components/layout/LaunchData"
 
 import { Route, Routes } from "react-router-dom"
 
@@ -15,6 +16,7 @@ function App() {
         <Route path="/" element={<Home />}  />
         <Route path="/about" element={<About />}  />
         <Route path="/apod" element={<APOD />} />
+        <Route path="/launch" element={<LaunchData />} />
       </Routes>
       <Footer />
     </div>
