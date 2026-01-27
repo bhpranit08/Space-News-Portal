@@ -11,7 +11,8 @@ interface CountdownProps {
     launchDate: RocketLaunch;
 }
 
-const Countdown = ({ launchDate }: CountdownProps) => {
+function Countdown(props: CountdownProps) {
+    const { launchDate } = props;
     const [countdown, setCountdown] = useState('');
 
     useEffect(() => {
@@ -21,7 +22,7 @@ const Countdown = ({ launchDate }: CountdownProps) => {
                 : new Date(parseInt(launchDate.sort_date, 10) * 1000);
 
             const now = new Date();
-            const diff = targetDate.getTime() - now.getTime();
+            const diff: number = targetDate.getTime() - now.getTime();
 
             if (diff < 0) {
                 setCountdown('Launched');
@@ -49,24 +50,25 @@ const Countdown = ({ launchDate }: CountdownProps) => {
     }, [launchDate]);
 
     return <span className="font-mono">{countdown}</span>;
-};
+}
 
 const LaunchData = () => {
     const { launchData, loading } = get_launch_data();
+    const launches: RocketLaunch[] = launchData?.result ?? [];
 
-    const formatDate = (launch: RocketLaunch) => {
+    const formatDate = (launch: RocketLaunch): string => {
         const targetDate = launch.t0
             ? new Date(launch.t0)
             : new Date(parseInt(launch.sort_date, 10) * 1000);
-        
-        return targetDate.toLocaleDateString('en-US', { 
-            month: 'long', 
-            day: 'numeric', 
-            year: 'numeric' 
+
+        return targetDate.toLocaleDateString('en-US', {
+            month: 'long',
+            day: 'numeric',
+            year: 'numeric',
         });
     };
 
-    const formatTime = (launch: RocketLaunch) => {
+    const formatTime = (launch: RocketLaunch): string => {
         if (launch.t0) {
             const date = new Date(launch.t0);
             return date.toLocaleTimeString('en-US', { 
@@ -78,7 +80,7 @@ const LaunchData = () => {
         return 'TBD';
     };
 
-    const getStatusColor = (launch: RocketLaunch) => {
+    const getStatusColor = (launch: RocketLaunch): string => {
         if (launch.result === 1) return 'bg-green-500';
         if (launch.result === 0) return 'bg-red-500';
 
@@ -86,8 +88,8 @@ const LaunchData = () => {
             ? new Date(launch.t0)
             : new Date(parseInt(launch.sort_date, 10) * 1000);
         const now = new Date();
-        const hoursUntil = (targetDate.getTime() - now.getTime()) / (1000 * 60 * 60);
-        
+        const hoursUntil: number = (targetDate.getTime() - now.getTime()) / (1000 * 60 * 60);
+
         if (hoursUntil < 24 && hoursUntil > 0) return 'bg-yellow-500';
         return 'bg-blue-500';
     };
@@ -101,7 +103,7 @@ const LaunchData = () => {
                         <Skeleton className="h-6 w-96 mx-auto" />
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        {[1, 2, 3].map((i) => (
+                        {[1, 2, 3].map((i: number) => (
                             <Card key={i}>
                                 <CardHeader>
                                     <Skeleton className="h-6 w-3/4 mb-2" />
@@ -137,7 +139,7 @@ const LaunchData = () => {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {launchData?.result?.map((launch: RocketLaunch, idx: number) => (
+                    {launches.map((launch: RocketLaunch, idx: number) => (
                         <Card key={idx} className="overflow-hidden hover:shadow-lg transition-all duration-300 group">
                             <CardHeader className="pb-3">
                                 <div className="flex items-start justify-between gap-2 mb-3">
@@ -208,7 +210,7 @@ const LaunchData = () => {
                 </div>
 
                 
-                {!loading && (!launchData?.result || launchData.result.length === 0) && (
+                {!loading && launches.length === 0 && (
                     <div className="text-center py-12">
                         <Rocket className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
                         <h3 className="text-xl font-semibold mb-2">No Upcoming Launches</h3>

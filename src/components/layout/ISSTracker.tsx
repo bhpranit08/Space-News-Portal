@@ -9,6 +9,7 @@ import type { IssPerson } from "@/types/api";
 const ISSTracker = () => {
     const { loadingPeople, loadingPosition, people, position } = get_iss_position();
     const [issCoordinates, setIssCoordinates] = useState({ x: 0, y: 0 });
+    const peopleList: IssPerson[] = people?.people ?? [];
 
     useEffect(() => {
         if (!position?.iss_position) return;
@@ -156,7 +157,7 @@ const ISSTracker = () => {
                             <CardContent>
                                 {loadingPeople ? (
                                     <div className="space-y-3">
-                                        {[1, 2, 3].map((i) => (
+                                        {[1, 2, 3].map((i: number) => (
                                             <Skeleton key={i} className="h-16 w-full" />
                                         ))}
                                     </div>
@@ -174,7 +175,7 @@ const ISSTracker = () => {
                                         </div>
 
                                         <div className="space-y-2 max-h-[500px] overflow-y-auto">
-                                            {people?.people?.map((person: IssPerson, idx: number) => (
+                                            {peopleList.map((person, idx) => (
                                                 <div
                                                     key={idx}
                                                     className="flex items-center justify-between p-3 bg-muted/50 rounded-lg hover:bg-muted transition-colors"
@@ -199,7 +200,7 @@ const ISSTracker = () => {
                                             ))}
                                         </div>
 
-                                        {people?.people?.length === 0 && (
+                                        {peopleList.length === 0 && (
                                             <div className="text-center py-8">
                                                 <p className="text-sm text-muted-foreground">
                                                     No astronaut data available
