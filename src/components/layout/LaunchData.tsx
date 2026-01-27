@@ -5,18 +5,23 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import { get_launch_data } from "@/hooks/useRocketLaunch";
+import type { RocketLaunch } from "@/types/api";
 
-const Countdown = ({ launchDate }) => {
+interface CountdownProps {
+    launchDate: RocketLaunch;
+}
+
+const Countdown = ({ launchDate }: CountdownProps) => {
     const [countdown, setCountdown] = useState('');
 
     useEffect(() => {
         const calculateCountdown = () => {
-            const targetDate = launchDate.t0 
-                ? new Date(launchDate.t0) 
-                : new Date(parseInt(launchDate.sort_date) * 1000);
-            
+            const targetDate = launchDate.t0
+                ? new Date(launchDate.t0)
+                : new Date(parseInt(launchDate.sort_date, 10) * 1000);
+
             const now = new Date();
-            const diff = targetDate - now;
+            const diff = targetDate.getTime() - now.getTime();
 
             if (diff < 0) {
                 setCountdown('Launched');
@@ -49,10 +54,10 @@ const Countdown = ({ launchDate }) => {
 const LaunchData = () => {
     const { launchData, loading } = get_launch_data();
 
-    const formatDate = (launch) => {
-        const targetDate = launch.t0 
-            ? new Date(launch.t0) 
-            : new Date(parseInt(launch.sort_date) * 1000);
+    const formatDate = (launch: RocketLaunch) => {
+        const targetDate = launch.t0
+            ? new Date(launch.t0)
+            : new Date(parseInt(launch.sort_date, 10) * 1000);
         
         return targetDate.toLocaleDateString('en-US', { 
             month: 'long', 
@@ -61,7 +66,7 @@ const LaunchData = () => {
         });
     };
 
-    const formatTime = (launch) => {
+    const formatTime = (launch: RocketLaunch) => {
         if (launch.t0) {
             const date = new Date(launch.t0);
             return date.toLocaleTimeString('en-US', { 
@@ -73,15 +78,15 @@ const LaunchData = () => {
         return 'TBD';
     };
 
-    const getStatusColor = (launch) => {
+    const getStatusColor = (launch: RocketLaunch) => {
         if (launch.result === 1) return 'bg-green-500';
         if (launch.result === 0) return 'bg-red-500';
-        
-        const targetDate = launch.t0 
-            ? new Date(launch.t0) 
-            : new Date(parseInt(launch.sort_date) * 1000);
+
+        const targetDate = launch.t0
+            ? new Date(launch.t0)
+            : new Date(parseInt(launch.sort_date, 10) * 1000);
         const now = new Date();
-        const hoursUntil = (targetDate - now) / (1000 * 60 * 60);
+        const hoursUntil = (targetDate.getTime() - now.getTime()) / (1000 * 60 * 60);
         
         if (hoursUntil < 24 && hoursUntil > 0) return 'bg-yellow-500';
         return 'bg-blue-500';
@@ -132,7 +137,7 @@ const LaunchData = () => {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {launchData?.result?.map((launch, idx) => (
+                    {launchData?.result?.map((launch: RocketLaunch, idx: number) => (
                         <Card key={idx} className="overflow-hidden hover:shadow-lg transition-all duration-300 group">
                             <CardHeader className="pb-3">
                                 <div className="flex items-start justify-between gap-2 mb-3">

@@ -9,7 +9,11 @@ import {
 } from "@/components/ui/popover"
 import { format } from "date-fns"
 
-export default function DatePickerSimple({ get_apod }) {
+interface DatePickerSimpleProps {
+    get_apod: (targetDate: string) => void;
+}
+
+export default function DatePickerSimple({ get_apod }: DatePickerSimpleProps) {
     const [date, setDate] = React.useState<Date>()
 
     React.useEffect(() => {

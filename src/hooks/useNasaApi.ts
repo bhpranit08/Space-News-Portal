@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
+import type { NeoFeed } from "@/types/api";
 
 const get_apod = () => {
-    const [loading, setLoading] = useState<boolean>(false)
-    const [apod, setApod] = useState()
+    const [loading, setLoading] = useState<boolean>(false);
+    const [apod, setApod] = useState<Record<string, unknown> | undefined>();
 
     const fetchApod = async () => {
         setLoading(true)
@@ -13,7 +14,7 @@ const get_apod = () => {
 
             const data = await response.json()
 
-            setApod(data as any)
+            setApod(data as Record<string, unknown>)
         } catch (err) {
             console.error(`Error fetching apod: ${(err as Error).message}`)
         } finally {
@@ -29,8 +30,8 @@ const get_apod = () => {
 }
 
 const get_neo = () => {
-    const [loading, setLoading] = useState<boolean>(false)
-    const [neo, setNeo] = useState()
+    const [loading, setLoading] = useState<boolean>(false);
+    const [neo, setNeo] = useState<NeoFeed | undefined>();
 
     const fetchNeo = async () => {
         setLoading(true)
@@ -41,7 +42,7 @@ const get_neo = () => {
 
             const data = await response.json()
 
-            setNeo(data.near_earth_objects as any)
+            setNeo(data.near_earth_objects as NeoFeed)
         } catch (err) {
             console.error(`Error fetching neo: ${(err as Error).message}`)
         } finally {

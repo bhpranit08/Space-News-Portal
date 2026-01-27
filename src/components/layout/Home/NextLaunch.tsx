@@ -5,18 +5,23 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import { get_launch_data } from "@/hooks/useRocketLaunch";
+import type { RocketLaunch } from "@/types/api";
 
-const CountdownTimer = ({ targetDate }) => {
+interface CountdownTimerProps {
+    targetDate: RocketLaunch;
+}
+
+const CountdownTimer = ({ targetDate }: CountdownTimerProps) => {
     const [countdown, setCountdown] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
 
     useEffect(() => {
         const calculateCountdown = () => {
-            const launch = targetDate.t0 
-                ? new Date(targetDate.t0) 
-                : new Date(parseInt(targetDate.sort_date) * 1000);
-            
+            const launch = targetDate.t0
+                ? new Date(targetDate.t0)
+                : new Date(parseInt(targetDate.sort_date, 10) * 1000);
+
             const now = new Date();
-            const diff = launch - now;
+            const diff = launch.getTime() - now.getTime();
 
             if (diff < 0) {
                 setCountdown({ days: 0, hours: 0, minutes: 0, seconds: 0 });
@@ -37,7 +42,7 @@ const CountdownTimer = ({ targetDate }) => {
         return () => clearInterval(interval);
     }, [targetDate]);
 
-    const formatNumber = (num) => String(num).padStart(2, '0');
+    const formatNumber = (num: number) => String(num).padStart(2, '0');
 
     return (
         <div className="grid grid-cols-4 gap-4 md:gap-6 max-w-3xl mx-auto">
@@ -100,11 +105,11 @@ const NextLaunch = () => {
     const { launchData, loading } = get_launch_data();
     const nextLaunch = launchData?.result?.[0];
 
-    const formatDate = (launch) => {
+    const formatDate = (launch: RocketLaunch) => {
         if (!launch) return '';
-        const targetDate = launch.t0 
-            ? new Date(launch.t0) 
-            : new Date(parseInt(launch.sort_date) * 1000);
+        const targetDate = launch.t0
+            ? new Date(launch.t0)
+            : new Date(parseInt(launch.sort_date, 10) * 1000);
         
         return targetDate.toLocaleDateString('en-US', { 
             weekday: 'long',

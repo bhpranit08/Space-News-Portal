@@ -6,11 +6,15 @@ import {
 import { AlertCircle, Zap, Ruler, Navigation, Calendar } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { get_neo } from "@/hooks/useNasaApi"
+import type { NeoEntry } from "@/types/api"
 
 const NearEarthCards = () => {
     const { neo } = get_neo()
 
-    const firstDateData = neo ? Object.values(neo)?.[0]?.length > 2 ? Object.values(neo)[0] : Object.values(neo)[1] : null;
+    const values = neo ? Object.values(neo) : [];
+    const firstDateData: NeoEntry[] | null = values.length > 0
+        ? (values[0]?.length > 2 ? values[0] : values[1] ?? null)
+        : null;
 
     return (
         <div className="flex flex-col gap-6 w-full">
@@ -19,7 +23,7 @@ const NearEarthCards = () => {
             </h1>
 
             <div className="grid w-full gap-4 md:grid-cols-3">
-                {firstDateData?.slice(0, 3).map((card, idx) => {
+                {firstDateData?.slice(0, 3).map((card: NeoEntry, idx: number) => {
                     const avgDiameter = (
                         (card.estimated_diameter.meters.estimated_diameter_min +
                         card.estimated_diameter.meters.estimated_diameter_max) / 2

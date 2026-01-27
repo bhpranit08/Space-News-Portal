@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Skeleton } from '@/components/ui/skeleton';
 import { get_iss_position } from "@/hooks/useIssApi";
+import type { IssPerson } from "@/types/api";
 
 const ISSTracker = () => {
     const { loadingPeople, loadingPosition, people, position } = get_iss_position();
@@ -21,8 +22,9 @@ const ISSTracker = () => {
         setIssCoordinates({ x, y });
     }, [position]);
 
-    const formatCoordinate = (value, type) => {
-        const num = parseFloat(value);
+    const formatCoordinate = (value: string | number | undefined, type: 'lat' | 'lng') => {
+        if (value === undefined || value === '') return '—';
+        const num = typeof value === 'number' ? value : parseFloat(String(value));
         const abs = Math.abs(num).toFixed(2);
         if (type === 'lat') {
             return `${abs}° ${num >= 0 ? 'N' : 'S'}`;
@@ -172,7 +174,7 @@ const ISSTracker = () => {
                                         </div>
 
                                         <div className="space-y-2 max-h-[500px] overflow-y-auto">
-                                            {people?.people?.map((person, idx) => (
+                                            {people?.people?.map((person: IssPerson, idx: number) => (
                                                 <div
                                                     key={idx}
                                                     className="flex items-center justify-between p-3 bg-muted/50 rounded-lg hover:bg-muted transition-colors"

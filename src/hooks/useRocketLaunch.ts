@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
+import type { RocketLaunchApiResponse } from "@/types/api";
 
 const get_launch_data = () => {
-    const [loading, setLoading] = useState(false)
-    const [launchData, setLaunchData] = useState()
+    const [loading, setLoading] = useState(false);
+    const [launchData, setLaunchData] = useState<RocketLaunchApiResponse | undefined>();
 
     const get_data = async() => {
         setLoading(true)
@@ -13,7 +14,7 @@ const get_launch_data = () => {
 
             const data = await response.json()
 
-            setLaunchData(data as any)
+            setLaunchData(data as RocketLaunchApiResponse)
         } catch (err) {
             console.error(`Error fetching apod: ${(err as Error).message}`)
         } finally {

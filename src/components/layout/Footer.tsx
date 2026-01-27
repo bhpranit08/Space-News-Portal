@@ -1,4 +1,4 @@
-import { Rocket, Github, Twitter, Mail, ExternalLink } from 'lucide-react';
+import { Rocket, Github, Mail, ExternalLink } from 'lucide-react';
 import { Separator } from '@/components/ui/separator';
 
 const Footer = () => {

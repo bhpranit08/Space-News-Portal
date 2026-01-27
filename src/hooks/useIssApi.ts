@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
+import type { IssPeopleResponse, IssPositionResponse } from "@/types/api";
 
 const get_iss_position = () => {
-    const [loadingPosition, setLoadingPosition] = useState<boolean>(false)
-    const [loadingPeople, setLoadingPeople] = useState<boolean>(false)
-    const [position, setPosition] = useState<any>()
-    const [people, setPeople] = useState<any>()
+    const [loadingPosition, setLoadingPosition] = useState<boolean>(false);
+    const [loadingPeople, setLoadingPeople] = useState<boolean>(false);
+    const [position, setPosition] = useState<IssPositionResponse | undefined>();
+    const [people, setPeople] = useState<IssPeopleResponse | undefined>();
 
     const fetch_position = async () => {
         setLoadingPosition(true)
@@ -15,7 +16,7 @@ const get_iss_position = () => {
 
             const data = await response.json()
 
-            setPosition(data as any)
+            setPosition(data as IssPositionResponse)
         } catch (err) {
             console.error(`Error fetching apod: ${(err as Error).message}`)
         } finally {
@@ -32,7 +33,7 @@ const get_iss_position = () => {
 
             const data = await response.json()
 
-            setPeople(data as any)
+            setPeople(data as IssPeopleResponse)
         } catch (err) {
             console.error(`Error fetching apod: ${(err as Error).message}`)
         } finally {
