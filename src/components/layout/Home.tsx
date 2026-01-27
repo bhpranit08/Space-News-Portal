@@ -1,13 +1,13 @@
 import Banner from "./Home/Banner"
-import NasaImages from "./Home/NasaImages"
 import NearEarthCards from "./Home/NearEarthCards"
+import NextLaunch from "./Home/NextLaunch"
 
 const Home = () => {
     return (
         <>
             <Banner />
             <NearEarthCards />
-            <NasaImages />
+            <NextLaunch />
         </>
     )
 }

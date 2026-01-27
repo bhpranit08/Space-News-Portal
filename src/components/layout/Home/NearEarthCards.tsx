@@ -10,7 +10,7 @@ import { get_neo } from "@/hooks/useNasaApi"
 const NearEarthCards = () => {
     const { neo } = get_neo()
 
-    const firstDateData = neo ? Object.values(neo)[0] : null;
+    const firstDateData = neo ? Object.values(neo)?.[0]?.length > 2 ? Object.values(neo)[0] : Object.values(neo)[1] : null;
 
     return (
         <div className="flex flex-col gap-6 w-full">
@@ -31,8 +31,10 @@ const NearEarthCards = () => {
                                 <div className="flex items-start justify-between gap-4">
                                     <CardTitle className="text-lg leading-tight">{card?.name}</CardTitle>
                                     <CardAction>
-                                        {card.is_potentially_hazardous_asteroid && (
+                                        {card.is_potentially_hazardous_asteroid ? (
                                             <Badge variant="destructive" className="shrink-0">High Risk</Badge>
+                                        ) : (
+                                            <Badge className="shrink-0 bg-green-600 text-white">Low Risk</Badge>
                                         )}
                                     </CardAction>
                                 </div>

@@ -1,4 +1,4 @@
-import { Rocket, Telescope, Sparkles, Globe, Code, Database } from 'lucide-react';
+import { Rocket, Telescope, Sparkles, Satellite, Code, Database } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 
@@ -23,9 +23,9 @@ const About = () => {
             color: "text-yellow-500"
         },
         {
-            icon: Globe,
-            title: "Space Image Gallery",
-            description: "Browse through curated collections of space imagery from various NASA missions and telescopes.",
+            icon: Satellite,
+            title: "ISS Details",
+            description: "Track the International Space Station in real time and learn key facts about its orbit, mission, and crew.",
             color: "text-blue-500"
         }
     ];
@@ -40,8 +40,7 @@ const About = () => {
 
     return (
         <div className="min-h-screen bg-background">
-            {/* Hero Section */}
-            <div className="bg-gradient-to-b from-primary/10 to-background py-16 px-4">
+            <div className="bg-linear-to-b from-primary/10 to-background py-16 px-4">
                 <div className="max-w-4xl mx-auto text-center">
                     <div className="flex justify-center mb-6">
                         <div className="p-4 bg-primary/10 rounded-full">
@@ -60,7 +59,6 @@ const About = () => {
             </div>
 
             <div className="max-w-6xl mx-auto px-4 py-12">
-                {/* Mission Statement */}
                 <div className="mb-16">
                     <h2 className="text-3xl font-bold mb-6 text-center">Our Mission</h2>
                     <Card>
@@ -75,7 +73,6 @@ const About = () => {
                     </Card>
                 </div>
 
-                {/* Features Grid */}
                 <div className="mb-16">
                     <h2 className="text-3xl font-bold mb-8 text-center">What We Offer</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -98,7 +95,6 @@ const About = () => {
                     </div>
                 </div>
 
-                {/* Tech Stack */}
                 <div className="mb-16">
                     <h2 className="text-3xl font-bold mb-8 text-center">Built With</h2>
                     <Card>
@@ -123,7 +119,6 @@ const About = () => {
                     </Card>
                 </div>
 
-                {/* Data Source */}
                 <div className="mb-16">
                     <h2 className="text-3xl font-bold mb-8 text-center">Data & Attribution</h2>
                     <Card>
