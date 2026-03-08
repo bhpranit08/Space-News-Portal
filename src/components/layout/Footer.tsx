@@ -7,15 +7,13 @@ const Footer = () => {
     const footerLinks = {
         explore: [
             { name: 'Picture of the Day', href: '/apod' },
-            { name: 'Mars Rovers', href: '/mars-rovers' },
-            { name: 'Asteroids', href: '/asteroids' },
-            { name: 'Gallery', href: '/gallery' }
+            { name: 'Rocket Launches', href: '/launch' },
+            { name: 'ISS Tracker', href: '/iss' },
         ],
         resources: [
             { name: 'NASA Official Site', href: 'https://www.nasa.gov', external: true },
             { name: 'NASA API Docs', href: 'https://api.nasa.gov', external: true },
             { name: 'About This Project', href: '/about' },
-            { name: 'Contact', href: '/contact' }
         ],
         social: [
             { name: 'GitHub', icon: Github, href: 'https://github.com/bhpranit08' },
