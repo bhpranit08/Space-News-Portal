@@ -26,15 +26,12 @@ const get_iss_position = () => {
     const fetch_people = async () => {
         setLoadingPeople(true)
         try {
-            const response = await fetch(
-                `https://api.allorigins.win/get?url=${encodeURIComponent('http://api.open-notify.org/astros.json')}`
-            )
-            const wrapper = await response.json()
-            const data = JSON.parse(wrapper.contents)
-
+            const response = await fetch('/api/astros')
+            const data = await response.json()
+            console.log(data)
             setPeople(data as IssPeopleResponse)
         } catch (err) {
-            console.error(`Error fetching apod: ${(err as Error).message}`)
+            console.error(`Error fetching people: ${(err as Error).message}`)
         } finally {
             setLoadingPeople(false)
         }
