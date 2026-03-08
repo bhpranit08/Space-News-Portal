@@ -26,10 +26,17 @@ const get_iss_position = () => {
     const fetch_people = async () => {
         setLoadingPeople(true)
         try {
-            const response = await fetch('/api/astros')
+            const response = await fetch('https://ll.thespacedevs.com/2.2.0/astronaut/?in_space=true&format=json')
             const data = await response.json()
-            console.log(data)
-            setPeople(data as IssPeopleResponse)
+
+            const mapped: IssPeopleResponse = {
+                number: data.count,
+                people: data.results.map((a: { name: string; spacecraft?: string }) => ({
+                    name: a.name,
+                    craft: a.spacecraft ?? 'ISS'
+                })),
+            }
+            setPeople(mapped)
         } catch (err) {
             console.error(`Error fetching people: ${(err as Error).message}`)
         } finally {
