@@ -10,10 +10,9 @@ const get_iss_position = () => {
     const fetch_position = async () => {
         setLoadingPosition(true)
         try {
-            const response = await fetch(`https://corsproxy.io/?http://api.open-notify.org/iss-now.json`, {
+            const response = await fetch(`https://api.wheretheiss.at/v1/satellites/25544`, {
                 method: "GET"
             })
-
             const data = await response.json()
 
             setPosition(data as IssPositionResponse)
@@ -27,11 +26,11 @@ const get_iss_position = () => {
     const fetch_people = async () => {
         setLoadingPeople(true)
         try {
-            const response = await fetch(`https://corsproxy.io/?http://api.open-notify.org/astros.json`, {
-                method: "GET"
-            })
-
-            const data = await response.json()
+            const response = await fetch(
+                `https://api.allorigins.win/get?url=${encodeURIComponent('http://api.open-notify.org/astros.json')}`
+            )
+            const wrapper = await response.json()
+            const data = JSON.parse(wrapper.contents)
 
             setPeople(data as IssPeopleResponse)
         } catch (err) {

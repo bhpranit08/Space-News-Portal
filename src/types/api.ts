@@ -60,7 +60,10 @@ export interface IssPosition {
 }
 
 export interface IssPositionResponse {
-    iss_position: IssPosition;
+    longitude: number;
+    latitude: number;
+    velocity: number;
+    altitude: number;
 }
 
 export interface IssPerson {
